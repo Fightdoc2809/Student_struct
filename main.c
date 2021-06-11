@@ -9,6 +9,7 @@ typedef struct student
 {
     unsigned int matrnr;
     char *lastname;
+    struct student* next;
 }Student, *Student_p;
 
 Student_p StudentAlloc (char* info);
@@ -16,10 +17,13 @@ void StudentFree(Student_p info);
 Student_p deepCopy(Student_p s);
 Student_p shallowCopy(Student_p s);
 int StudentEquals (Student_p s1, Student_p s2);
+int hashCode(int);
 void printStudents(Student_p*, int);
 void print_menu (void);
 void press_enter (void);
 void clearscreen (int);
+
+int i = 719;
 
 int main() {
 
@@ -28,6 +32,7 @@ int main() {
     char buffer[400];
     char choice;
     int i = 0;
+    struct student* hashArray[i];
     Student_p students [100];
     Student_p *ptr = students;
 
@@ -76,6 +81,10 @@ int main() {
 
 printf ("Thanks for using the modern file-card system.\n");
 return 0;
+}
+
+int hashCode(int matrnr){
+    return matrnr % i;
 }
 
 void printStudents(Student_p* pointer, int laenge){
